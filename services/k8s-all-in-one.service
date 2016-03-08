@@ -1,0 +1,28 @@
+[Unit]
+Description=Meta-service to start all Kubernetes components
+# Node services
+Requires=docker.service
+Requires=kube-proxy.service
+Requires=kubelet.service
+# Master services
+Requires=etcd.service
+Requires=kube-apiserver.service
+Requires=kube-controller-manager.service
+Requires=kube-scheduler.service
+# Wait for Node services
+After=docker.service
+After=kube-proxy.service
+After=kubelet.service
+# Wait for Master services
+After=etcd.service
+After=kube-apiserver.service
+After=kube-controller-manager.service
+After=kube-scheduler.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/echo "Kubernetes services started"
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
