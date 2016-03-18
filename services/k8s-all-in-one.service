@@ -21,7 +21,9 @@ After=kube-scheduler.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/echo "Kubernetes services started"
+ExecStart=/usr/bin/echo "Node: docker kube-proxy kubelet"
+ExecStart=/usr/bin/echo "Master: etcd kube-apiserver kube-controller-manager kube-scheduler"
+ExecStart=/usr/bin/echo "Node status check: kubectl get nodes"
 RemainAfterExit=true
 
 [Install]
